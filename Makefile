@@ -1,19 +1,30 @@
+# CC = gcc
+# CFLAGS = -Wall -g -O2
+
+# SRC1 = heap_overflow.c
+# SRC2 = use_after_free.c
+
+# TARGET1 = $(SRC1:.c=)
+# TARGET2 = $(SRC2:.c=)
+
+# all: $(TARGET1) $(TARGET2)
+
+# $(TARGET1): $(SRC1)
+# 	$(CC) $(CFLAGS) -c $< -o $@
+
+# $(TARGET2): $(SRC2)
+# 	$(CC) $(CFLAGS) -c $< -o $@
+
+# clean:
+# 	rm -f $(TARGET1) $(TARGET2)
+
 CC = gcc
-CFLAGS = -Wall -g -O2
+CFLAGS = -Wall -O2
+SRC = use_after_free.c
+TARGET = use_after_free
 
-SRC1 = heap_overflow.c
-SRC2 = use_after_free.c
-
-TARGET1 = $(SRC1:.c=)
-TARGET2 = $(SRC2:.c=)
-
-all: $(TARGET1) $(TARGET2)
-
-$(TARGET1): $(SRC1)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(TARGET2): $(SRC2)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) -o $(TARGET) $(SRC)
 
 clean:
-	rm -f $(TARGET1) $(TARGET2)
+	rm -f $(TARGET)

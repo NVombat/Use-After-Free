@@ -13,6 +13,8 @@ int main(int argc, char * argv[]){
 
     printf("Heap Overflow\n");
 
+    // Overflow is possible because of contiguous memory allocation
+    // Chunks of memory allocated side by side (especially because they are the same size)
     char *uname = malloc(64);
     char *cmd = malloc(64);
 

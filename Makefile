@@ -6,6 +6,7 @@ SRC2 = use_after_free.c
 
 TARGET1 = $(SRC1:.c=)
 TARGET2 = $(SRC2:.c=)
+TEST_TARGET = test_uaf
 
 all: $(TARGET1) $(TARGET2)
 
@@ -15,8 +16,13 @@ $(TARGET1): $(SRC1)
 $(TARGET2): $(SRC2)
 	$(CC) $(CFLAGS) -o $(TARGET2) $(SRC2)
 
+test: $(TEST_TARGET)
+
+$(TEST_TARGET): $(SRC2)
+	$(CC) $(CFLAGS) -o $(TEST_TARGET) $(SRC2)
+
 clean:
-	rm -f $(TARGET1) $(TARGET2)
+	rm -f $(TARGET1) $(TARGET2) $(TEST_TARGET)
 
 # CC = gcc
 # CFLAGS = -Wall -O2

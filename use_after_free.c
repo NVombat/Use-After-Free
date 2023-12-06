@@ -1,15 +1,23 @@
 // Reference: https://infosecwriteups.com/arming-the-use-after-free-bc174a26c5f4
 
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 int main()
 {
+    printf("Okay, so here's what YOU need to do...\n");
+    printf("You have access to the source code...\n");
+    printf("Try and become root so you can execute a command of your choice and drop a shell...\n");
+    printf("If you cannot become root, you stoopid!\n\n");
+
     char * username = 0;
     char * password = 0;
 
     int flag = 0;
+
+    clock_t start = clock();
 
     while(1)
     {
@@ -81,12 +89,25 @@ int main()
                 // root does not need to authenticate
                 if(!strcmp(username, "root"))
                 {
+                    clock_t end = clock();
+                    double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+                    printf("You took %f seconds...\n", time_spent);
+
                     flag = 1;
-                    printf("Congratulations! You figured out how to exploit the Use-After-Free vulnerability and dropped a shell!\n");
+                    printf("Congratulations! You figured out how to exploit the vulnerability and drop a shell you fkn nerd!\n");
                     printf("---SOME PRIVILEGED SHIT GOING ON HERE---\n");
-                    // system("/usr/bin/bash");
-                    system("/usr/bin/ls");
+
                     // Potential command injection?
+                    char * command = (char*)malloc(20*sizeof(char));
+                    printf("$ Trying to mimic a shell. Enter a command cuz u root my g: ");
+                    scanf("%254s", command);
+
+                    // system("/usr/bin/bash");
+                    // system("/usr/bin/ls");
+                    system(command);
+
+                    free(command);
+                    command = NULL;
                     exit(0);
                 }
 
@@ -105,11 +126,16 @@ int main()
                 break;
 
             case 5:
+                clock_t end = clock();
+                double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+
                 if (flag == 0){
+                    printf("You just wasted %f seconds!\n", time_spent);
                     printf("Seems like you gave up on trying to drop a shell! Sucks to be You(se-After-Free)\n");
                 }
                 else{
-                    printf("Congratulations! You figured out how to exploit the Use-After-Free vulnerability and dropped a shell!\n");
+                    printf("You took %f seconds...\n", time_spent);
+                    printf("Congratulations! You figured out how to exploit the vulnerability and drop a shell you fkn nerd!\n");
                 }
                 exit(0);
 

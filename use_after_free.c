@@ -64,6 +64,11 @@ int main()
 
             case 4:
                 // Login/Exploit
+                if (!password || !username){
+                    printf("How tf you gonna log in without both credentials [username & password] dumbass! Set them up first\n");
+                    break;
+                }
+
                 char * temp_uname = (char*)malloc(20*sizeof(char));
                 char * temp_pwd = (char*)malloc(20*sizeof(char));
 
@@ -78,7 +83,7 @@ int main()
                 {
                     flag = 1;
                     printf("Congratulations! You figured out how to exploit the Use-After-Free vulnerability and dropped a shell!\n");
-                    printf("SOME PRIVILEGED SHIT GOING ON HERE\n");
+                    printf("---SOME PRIVILEGED SHIT GOING ON HERE---\n");
                     // system("/usr/bin/bash");
                     system("/usr/bin/ls");
                     // Potential command injection?

@@ -10,7 +10,9 @@ int main()
     printf("Okay, so here's what YOU need to do...\n");
     printf("You have access to the source code...\n");
     printf("Try and become root so you can execute a command of your choice and drop a shell...\n");
-    printf("If you cannot become root, you stoopid!\n\n");
+    printf("There's atleast 2 different ways to exploit this code so...\n");
+    printf("If you can't become root, you stoopid!\n");
+    printf("Type shit Type shit!\n");
 
     char * username = 0;
     char * password = 0;
@@ -21,6 +23,7 @@ int main()
 
     while(1)
     {
+        // Print username and password (with address) to keep a track of the variables
         if(username){
             printf("USERNAME ADDRESS: %x\nUSERNAME: %s\n", username, username);
         }
@@ -46,6 +49,7 @@ int main()
                 printf("Enter username: ");
                 scanf("%254s", username);
 
+                // "root" username not allowed -> set username to ""
                 if(!strcmp(username, "root"))
                 {
                     printf("[root]: This username is not allowed. Please try again!\n");
@@ -65,9 +69,14 @@ int main()
                 break;
 
             case 3:
-                // Free username and password (when resetting)
+                // Free username and password (when resetting) (order matters)
+                // Freeing username allows the same chunk of memory to be allocated to password if case 3 is followed by case 2
+                // The username pointer will still be pointing to that chunk (even after it has been freed)
+                // So when we set password to "root", username also becomes "root" as the memory address is the same
                 free(password);
                 free(username);
+                // temp_uname = NULL;
+                // temp_pwd = NULL;
                 break;
 
             case 4:
@@ -77,6 +86,9 @@ int main()
                     break;
                 }
 
+                // If case 4 follows case 3, temp_uname and temp_pwd get assigned the freed memory chunks
+                // So if I enter "root" as temp username, it writes to username because the username pointer is still pointing to that memory chunk too
+                // And the same goes for password
                 char * temp_uname = (char*)malloc(20*sizeof(char));
                 char * temp_pwd = (char*)malloc(20*sizeof(char));
 
@@ -112,6 +124,8 @@ int main()
                 }
 
                 if(!strcmp(temp_uname, username) && !strcmp(temp_pwd, password)){
+                    printf("%s -- %s -- %s -- %s", temp_uname, username, temp_pwd, password);
+                    // BUG -> If case 3 is followed by case 4, it is possible to log in with any username and password
                     printf("Logged in successfully but DID NOT drop a shell sucka!\n");
                 }
                 else{
@@ -120,8 +134,8 @@ int main()
 
                 free(temp_pwd);
                 free(temp_uname);
-                temp_uname = NULL;
-                temp_pwd = NULL;
+                // temp_uname = NULL;
+                // temp_pwd = NULL;
 
                 break;
 
@@ -153,4 +167,10 @@ How to exploit the above code:
 3 - Free the chunks of memory using option 3.
 4 - Select option 2 to allocate a chunk of memory for the password so that it can rewrite the contents of the previously allocated username chunk.
 5 - Use option 4 to log in and successfully exploit the vulnerability
+
+OR
+1 - Select option 1 to allocate a chunk of memory to store the username
+2 - Select option 2 to allocate a chunk of memory to store the password
+3 - Free the chunks of memory using option 3.
+4 - Select option 4 to allocate the chunks of memory to temp_uname and temp_pwd and then enter "root" as the username
 */

@@ -1,5 +1,3 @@
-// Reference - https://infosecwriteups.com/heap-exploitation-for-homo-sapiens-f166cd6a59fe
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>

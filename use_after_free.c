@@ -1,5 +1,3 @@
-// Reference: https://infosecwriteups.com/arming-the-use-after-free-bc174a26c5f4
-
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>

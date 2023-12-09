@@ -12,12 +12,13 @@ int main()
     printf("If you can't become root, you stoopid!\n");
     printf("Type shit Type shit!\n");
 
+    time_t start_time;
+    time(&start_time);
+
     char * username = 0;
     char * password = 0;
 
     int flag = 0;
-
-    clock_t start = clock();
 
     while(1)
     {
@@ -50,7 +51,7 @@ int main()
                 // "root" username not allowed -> set username to ""
                 if(!strcmp(username, "root"))
                 {
-                    printf("[root]: This username is not allowed. Please try again!\n");
+                    printf("[root]: Ain't no way it's that easy. Try again fool!\n");
                     strcpy(username, "");
                     // Possible Heap overflow?
                     // strcpy(username, argv[0])
@@ -63,6 +64,7 @@ int main()
                 password = malloc(20*sizeof(char));
                 printf("Enter password: ");
                 scanf("%254s", password);
+                printf("Bruh! My grandmother is stronger than that password!\n");
 
                 break;
 
@@ -73,8 +75,8 @@ int main()
                 // So when we set password to "root", username also becomes "root" as the memory address is the same
                 free(password);
                 free(username);
-                // temp_uname = NULL;
-                // temp_pwd = NULL;
+                // password = NULL;
+                // username = NULL;
                 break;
 
             case 4:
@@ -99,9 +101,11 @@ int main()
                 // root does not need to authenticate
                 if(!strcmp(username, "root"))
                 {
-                    clock_t end = clock();
-                    double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
-                    printf("You took %f seconds...\n", time_spent);
+                    time_t end_time;
+                    time(&end_time);
+
+                    double time_spent = difftime(end_time, start_time);
+                    printf("You took %.2f seconds...\n", time_spent);
 
                     flag = 1;
                     printf("Congratulations! You figured out how to exploit the vulnerability and drop a shell you fkn nerd!\n");
@@ -117,14 +121,14 @@ int main()
                     system(command);
 
                     free(command);
-                    command = NULL;
+                    // command = NULL;
                     exit(0);
                 }
 
                 if(!strcmp(temp_uname, username) && !strcmp(temp_pwd, password)){
-                    printf("%s -- %s -- %s -- %s", temp_uname, username, temp_pwd, password);
+                    printf("%s -- %s -- %s -- %s\n", temp_uname, username, temp_pwd, password);
                     // BUG -> If case 3 is followed by case 4, it is possible to log in with any username and password
-                    printf("Logged in successfully but DID NOT drop a shell sucka!\n");
+                    printf("Logged in successfully but DID NOT drop a shell sucka! Not as smart as you thought you were lmao!\n");
                 }
                 else{
                     printf("Incorrect username or password! Try again dumbass!\n");
@@ -138,15 +142,16 @@ int main()
                 break;
 
             case 5:
-                clock_t end = clock();
-                double time_spent = (double)(end - start) / CLOCKS_PER_SEC;
+                time_t end_time;
+                time(&end_time);
+                double time_spent = difftime(end_time, start_time);
 
                 if (flag == 0){
-                    printf("You just wasted %f seconds!\n", time_spent);
+                    printf("You just wasted %.2f seconds!\n", time_spent);
                     printf("Seems like you gave up on trying to drop a shell! Sucks to be You(se-After-Free)\n");
                 }
                 else{
-                    printf("You took %f seconds...\n", time_spent);
+                    printf("You took %.2f seconds...\n", time_spent);
                     printf("Congratulations! You figured out how to exploit the vulnerability and drop a shell you fkn nerd!\n");
                 }
                 exit(0);

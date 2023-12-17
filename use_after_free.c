@@ -75,8 +75,7 @@ int main()
                 // So when we set password to "root", username also becomes "root" as the memory address is the same
                 free(password);
                 free(username);
-                // password = NULL;
-                // username = NULL;
+
                 break;
 
             case 4:
@@ -121,7 +120,7 @@ int main()
                     system(command);
 
                     free(command);
-                    // command = NULL;
+
                     exit(0);
                 }
 
@@ -136,8 +135,6 @@ int main()
 
                 free(temp_pwd);
                 free(temp_uname);
-                // temp_uname = NULL;
-                // temp_pwd = NULL;
 
                 break;
 

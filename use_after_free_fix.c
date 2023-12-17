@@ -59,6 +59,11 @@ int main()
 
             case 2:
                 // Save password
+                if (!username){
+                    printf("What tf are you setting a password for? Set a username first\n");
+                    break;
+                }
+
                 password = malloc(20*sizeof(char));
                 printf("Enter password: ");
                 scanf("%254s", password);
@@ -67,6 +72,12 @@ int main()
                 break;
 
             case 3:
+                if (!password && !username){
+                    printf("Do you want me to reset yo ass? Use your brains man!\n");
+                    printf("How tf you gonna reset smth that don't exist!\n");
+                    break;
+                }
+
                 free(password);
                 free(username);
 

@@ -61,6 +61,11 @@ int main()
 
             case 2:
                 // Save password
+                if (!username){
+                    printf("What tf are you setting a password for? Set a username first fool\n");
+                    break;
+                }
+
                 password = malloc(20*sizeof(char));
                 printf("Enter password: ");
                 scanf("%254s", password);
@@ -73,6 +78,12 @@ int main()
                 // Freeing username allows the same chunk of memory to be allocated to password if case 3 is followed by case 2
                 // The username pointer will still be pointing to that chunk (even after it has been freed)
                 // So when we set password to "root", username also becomes "root" as the memory address is the same
+                if (!password && !username){
+                    printf("Do you want me to reset yo ass? Use your brains man!\n");
+                    printf("How tf you gonna reset smth that don't exist!\n");
+                    break;
+                }
+
                 free(password);
                 free(username);
 

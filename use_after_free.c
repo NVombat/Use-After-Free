@@ -86,6 +86,7 @@ int main()
 
                 free(password);
                 free(username);
+                // Dangling Pointers?
 
                 break;
 
@@ -136,7 +137,7 @@ int main()
                 }
 
                 if(!strcmp(temp_uname, username) && !strcmp(temp_pwd, password)){
-                    printf("%s -- %s -- %s -- %s\n", temp_uname, username, temp_pwd, password);
+                    // printf("%s -- %s -- %s -- %s\n", temp_uname, username, temp_pwd, password);
                     // BUG -> If case 3 is followed by case 4, it is possible to log in with any username and password
                     printf("Logged in successfully but DID NOT drop a shell sucka! Not as smart as you thought you were lmao!\n");
                 }
@@ -170,18 +171,3 @@ int main()
         }
     }
 }
-
-/*
-How to exploit the above code:
-1 - Select option 1 to allocate a chunk of memory to store the username
-2 - Select option 2 to allocate a chunk of memory to store the password
-3 - Free the chunks of memory using option 3.
-4 - Select option 2 to allocate a chunk of memory for the password so that it can rewrite the contents of the previously allocated username chunk.
-5 - Use option 4 to log in and successfully exploit the vulnerability
-
-OR
-1 - Select option 1 to allocate a chunk of memory to store the username
-2 - Select option 2 to allocate a chunk of memory to store the password
-3 - Free the chunks of memory using option 3.
-4 - Select option 4 to allocate the chunks of memory to temp_uname and temp_pwd and then enter "root" as the username
-*/

@@ -8,8 +8,7 @@ int main()
     printf("Okay, so here's what YOU need to do...\n");
     printf("You have access to the source code...\n");
     printf("Try and become root so you can execute a command of your choice and drop a shell...\n");
-    printf("There's atleast 2 different ways to exploit this code so...\n");
-    printf("If you can't become root, you stoopid!\n");
+    printf("This the patched version so you prolly neva gon be root sucks2suck lol!\n");
     printf("Type shit Type shit!\n");
 
     time_t start_time;
@@ -126,7 +125,7 @@ int main()
                 }
 
                 if(!strcmp(temp_uname, username) && !strcmp(temp_pwd, password)){
-                    printf("%s -- %s -- %s -- %s\n", temp_uname, username, temp_pwd, password);
+                    // printf("%s -- %s -- %s -- %s\n", temp_uname, username, temp_pwd, password);
                     printf("Logged in successfully but DID NOT drop a shell sucka! Not as smart as you thought you were lmao!\n");
                 }
                 else{
@@ -149,6 +148,7 @@ int main()
                 if (flag == 0){
                     printf("You just wasted %.2f seconds!\n", time_spent);
                     printf("Seems like you gave up on trying to drop a shell! Sucks to be You(se-After-Free)\n");
+                    printf("This the patched version dumbass, I literally said that before we started! You neva gon be root\n");
                 }
                 else{
                     printf("You took %.2f seconds...\n", time_spent);

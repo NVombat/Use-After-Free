@@ -24,5 +24,3 @@ int main(int argc, char * argv[]){
 
     system(cmd);
 }
-
-// Command -> ./heap_overflow AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAls

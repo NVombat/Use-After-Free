@@ -5,7 +5,7 @@ Use After Free Vulnerability, Attack and Fix
 ## Clone The Repository:
 
 ```
-$ git clone https://github.com/NVombat/Use-After-Free.git
+$ git clone https://github.com/NVombat/<insert_repo_name>.git
 ```
 
 ## Files:
